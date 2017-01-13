@@ -1,4 +1,5 @@
 # web
+[![Build Status](https://travis-ci.org/nomorepass/web.svg?branch=master)](https://travis-ci.org/nomorepass/web)
 
 > frontend for nomorepass
 
