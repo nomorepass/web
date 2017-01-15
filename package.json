@@ -1,7 +1,7 @@
 {
   "name": "web",
   "description": "frontend for nomorepass",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "author": "isayme <isaymeorg@gmail.com>",
   "private": true,
   "scripts": {
