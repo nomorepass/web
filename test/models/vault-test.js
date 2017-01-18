@@ -15,31 +15,35 @@ describe('Vault', () => {
       for (let i = 0; i < 8; i++) {
         key = key + 'abcdefgh'
       }
-      let func = () => new Vault(key, {
-        username: '!UDi4K79ykirjaZCy9ILC1Q==|Sh+4CeHEZjiH7q9vhX8YLA==',
-        password: '!ONUVupB3Ci+F1AcwMyVKZA==|glNJylmJLCk5jl/XBMNMdA==',
-        url: '!nWPC5q2KnCe9w8I7T7HBQw==|W48P4TX68/hWjzjfKy0QeA==',
-        note: '!CJLaavHQgCADnF2mfadsQg==|Hg98YK4jGH1XzraZ7/SsTQ=='
-      })
+      let func = () => new Vault(key)
       expect(func).not.throw(Error)
     })
   })
 
-  describe('username', () => {
-    let user = userMocker()
-    let vault
+  describe('toSafe', () => {
+    it('should ok', async () => {
+      let vault = await vaultMocker(userMocker())
 
-    before(async () => {
-      vault = await vaultMocker(user)
+      vault.username = 'UUsername'
+      vault.data.id = 5
+
+      let encrypt = vault.toSafe()
+
+      expect(encrypt.username).match(/![a-zA-Z0-9+/=]+\|[a-zA-Z0-9+/=]+/)
+      expect(encrypt.id).equal(5)
     })
+  })
 
-    it('get', () => {
-      expect(vault.username).equal('UUsername')
-    })
+  describe('fromSafe', () => {
+    it('should ok', async () => {
+      let vault = await vaultMocker(userMocker())
 
-    it('set', () => {
-      vault.username = 'newname'
-      expect(vault.username).equal('newname')
+      vault.fromSafe({
+        id: 5,
+        password: '!ONUVupB3Ci+F1AcwMyVKZA==|glNJylmJLCk5jl/XBMNMdA=='
+      })
+      expect(vault.password).equal('PPassword')
+      expect(vault.data.id).equal(5)
     })
   })
 })

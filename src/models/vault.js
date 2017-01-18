@@ -1,26 +1,18 @@
 import aes256 from '../utils/aes256'
 
 class Vault {
-  constructor (key, payload) {
+  constructor (key) {
     if (!/[a-z0-9]{64}/.test(key)) {
       throw new Error('invalid key')
     }
 
     this._key = aes256.hexToBytes(key)
 
-    if (!payload) {
-      throw new Error('payload required')
-    }
-
     this.data = {}
-    for (let prop of ['username', 'password', 'url', 'note']) {
-      this.data[prop] = payload[prop]
-      if (payload[prop] && /![a-zA-Z0-9+/=]+\|[a-zA-Z0-9+/=]+/.test(payload[prop])) {
-        this.data[prop] = payload[prop]
-      } else {
-        throw new Error(`payload.${prop} invalid`)
-      }
-    }
+  }
+
+  get validAttrs () {
+    return ['name', 'url', 'note', 'username', 'password']
   }
 
   _encrypt (plaintext) {
@@ -43,12 +35,63 @@ class Vault {
     return aes256.decrypt(encrypted, key, iv)
   }
 
-  get username () {
-    return this._decrypt(this.data.username)
+  fromSafe (data) {
+    if (data.id) {
+      this.data.id = data.id
+    }
+
+    for (let key of this.validAttrs) {
+      if (data[key]) {
+        this.data[key] = this._decrypt(data[key])
+      }
+    }
   }
 
-  set username (username) {
-    this.data.username = this._encrypt(username)
+  toSafe () {
+    let result = { id: this.data.id }
+
+    for (let key of this.validAttrs) {
+      if (this.data[key]) {
+        result[key] = this._encrypt(this.data[key])
+      }
+    }
+    
+    return result
+  }
+
+  get username () {
+    return this.data.username
+  }
+  set username (value) {
+    this.data.username = value
+  }
+
+  get password () {
+    return this.data.password
+  }
+  set password (value) {
+    this.data.password = value
+  }
+
+  get name () {
+    return this.data.name
+  }
+  set name (value) {
+    this.data.name = value
+  }
+
+  get url () {
+    return this.data.url
+  }
+  set url (value) {
+    this.data.url = value
+  }
+
+  get note () {
+    return this.data.note
+  }
+  set note (value) {
+    this.data.note = value
   }
 }
 
