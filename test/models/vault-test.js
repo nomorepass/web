@@ -20,6 +20,20 @@ describe('Vault', () => {
     })
   })
 
+  describe('set/get', () => {
+    let vault = new Vault('abcd'.repeat(16))
+
+    for (let key of vault.validAttrs) {
+      describe(key, () => {
+        it('should ok', () => {
+          let value = `${key}-value`
+          vault[key] = value
+          expect(vault[key]).equal(value)
+        })
+      })
+    }
+  })
+
   describe('toSafe', () => {
     it('should ok', async () => {
       let vault = await vaultMocker(userMocker())
