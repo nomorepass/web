@@ -31,7 +31,7 @@ let hexToBytes = (hex) => {
 }
 
 let randomIV = () => {
-  return stringToBytes(forge.random.getBytesSync(16))
+  return stringToBytes(forge.random.getBytesSync(32))
 }
 
 let bytesToHex = (bytes) => bytes.toHex()
@@ -46,7 +46,7 @@ export default {
   randomIV,
   stringToBytes,
   base64ToBytes,
+  bytesToBase64,
   hexToBytes,
-  bytesToHex,
-  bytesToBase64
+  bytesToHex
 }

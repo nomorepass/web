@@ -55,7 +55,7 @@ class Vault {
         result[key] = this._encrypt(this.data[key])
       }
     }
-    
+
     return result
   }
 
