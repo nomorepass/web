@@ -13,11 +13,14 @@
   },
   "dependencies": {
     "node-forge": "^0.6.47",
-    "vue": "^2.1.0"
+    "vue": "^2.1.0",
+    "vue-resource": "^1.0.3",
+    "vue-router": "^2.1.2"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
+    "babel-plugin-transform-runtime": "^6.15.0",
     "babel-polyfill": "^6.20.0",
     "babel-preset-env": "^1.1.8",
     "babel-register": "^6.18.0",
@@ -39,6 +42,9 @@
       "describe",
       "it",
       "before"
+    ],
+    "ignore": [
+      "src/assets/js/forge.bundle.js"
     ]
   },
   "pre-commit": [

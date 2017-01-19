@@ -26,8 +26,8 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
+        loaders: ['babel-loader'],
+        exclude: /(node_modules|forge\.bundle\.js)/
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -41,7 +41,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      'vue$': 'vue/dist/vue.common.js'
+      'vue$': 'vue/dist/vue.common.js',
+      'node-forge': path.resolve(__dirname, 'src/assets/js/forge.bundle.js')
     }
   },
   devServer: {
@@ -51,7 +52,7 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#source-map'
 }
 
 if (process.env.NODE_ENV === 'production') {

@@ -1,7 +1,7 @@
 import pbkdf2 from '../utils/pbkdf2'
 
 class User {
-  constructor (username, password, iterations) {
+  constructor (username, password, iterations = 5000) {
     this.username = username
     this.password = password
     this.iterations = iterations
