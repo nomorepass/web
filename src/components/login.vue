@@ -42,13 +42,13 @@ export default {
         email: this.email,
         password: key
       }
+
       this.$http.post('api/users/login', body)
         .then((res) => {
-          this.username = res.body
-          console.log('sssss')
+          this.$store.commit('setAuthorized', res.body)
         })
         .catch((res) => {
-          console.error('fff', res)
+          this.$store.commit('setAuthorized', false)
         })
     },
 

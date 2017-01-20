@@ -13,10 +13,10 @@
         </a>
       </span>
       <span class="nav-item" v-else>
-        <a class="button is-primary">
+        <a class="button is-primary" @click="gotoSignup">
           <span>SIGNUP</span>
         </a>
-        <a class="button">
+        <a class="button" @click="gotoLogin">
           <span>LOGIN</span>
         </a>
       </span>
@@ -38,6 +38,13 @@ export default {
   },
   methods: {
     logout () {
+
+    },
+    gotoLogin () {
+      this.$router.push('login')
+    },
+    gotoSignup () {
+      this.$router.push('signup')
     }
   }
 }

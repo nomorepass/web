@@ -1,3 +1,3 @@
 export default {
-  baseUrl: 'http://localhost:4217'
+  baseUrl: 'http://nomorepass.io'
 }
