@@ -5,9 +5,11 @@
         <el-form-item label="Username">
           <el-input v-model="username" placeholder="username"></el-input>
         </el-form-item>
+
         <el-form-item label="Email">
           <el-input v-model="email" placeholder="email"></el-input>
         </el-form-item>
+
         <el-form-item label="Password">
           <el-input v-model="password" type="password" placeholder="password"></el-input>
         </el-form-item>
@@ -46,10 +48,16 @@ export default {
 
         return this.$http.post('api/users/signup', body)
           .then((res) => {
-            console.log('success')
+            this.$notify({
+              type: 'success',
+              title: `Welcome, ${res.body.username}`
+            })
           })
           .catch((res) => {
-            console.error('fail', res)
+            this.$notify({
+              type: 'error',
+              title: `Sorry, signup failed`
+            })
           })
       })
     },
