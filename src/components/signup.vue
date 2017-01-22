@@ -1,31 +1,24 @@
 <template>
-  <div class="columns">
-    <div class="column is-half is-offset-3">
-      <label class="label">Username</label>
-      <p class="control">
-        <input class="input is-medium" type="text" placeholder="username" v-model="username">
-      </p>
+  <el-row>
+    <el-col :span="12" :offset="6" :xs="{span:20, offset:2}" :sm="{span:16, offset:4}" :md="{span:12, offset:6}" :lg="{span:8, offset:8}">
+      <el-form>
+        <el-form-item label="Username">
+          <el-input v-model="username" placeholder="username"></el-input>
+        </el-form-item>
+        <el-form-item label="Email">
+          <el-input v-model="email" placeholder="email"></el-input>
+        </el-form-item>
+        <el-form-item label="Password">
+          <el-input v-model="password" type="password" placeholder="password"></el-input>
+        </el-form-item>
 
-      <label class="label">Email</label>
-      <p class="control">
-        <input class="input is-medium" type="text" placeholder="email" v-model="email">
-      </p>
-
-      <label class="label">Password</label>
-      <p class="control">
-        <input class="input is-medium" type="password" placeholder="password" v-model="password">
-      </p>
-
-      <div class="control is-grouped">
-        <p class="control">
-          <button class="button is-primary" @click="signup">SIGNUP</button>
-        </p>
-        <p class="control">
-          <button class="button" @click="gotoLogin">LOGIN</button>
-        </p>
-      </div>
-    </div>
-  </div>
+        <el-form-item>
+          <el-button type="primary" @click="signup">SIGNUP</el-button>
+          <el-button @click="gotoLogin">LOGIN</el-button>
+        </el-form-item>
+      </el-form>
+    </el-col>
+  </el-row>
 </template>
 
 <script>

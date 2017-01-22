@@ -30,7 +30,11 @@ module.exports = {
         exclude: /(node_modules|forge\.bundle\.js)/
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif|svg)(\?\S*)?$/,
         loader: 'file-loader',
         options: {
           name: '[name].[ext]?[hash]'

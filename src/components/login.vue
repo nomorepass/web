@@ -1,25 +1,21 @@
 <template>
-  <div class="columns">
-    <div class="column is-half is-offset-3">
-      <label class="label">Email</label>
-      <p class="control">
-        <input class="input is-medium" type="text" placeholder="email" v-model="email">
-      </p>
-      <label class="label">Password</label>
-      <p class="control">
-        <input class="input is-medium" type="password" placeholder="password" v-model="password">
-      </p>
+  <el-row>
+    <el-col :span="12" :offset="6" :xs="{span:20, offset:2}" :sm="{span:16, offset:4}" :md="{span:12, offset:6}" :lg="{span:8, offset:8}">
+      <el-form>
+        <el-form-item label="Email">
+          <el-input v-model="email" placeholder="email"></el-input>
+        </el-form-item>
+        <el-form-item label="Password">
+          <el-input v-model="password" type="password" placeholder="password"></el-input>
+        </el-form-item>
 
-      <div class="control is-grouped">
-        <p class="control">
-          <button class="button is-primary" @click="login">LOGIN</button>
-        </p>
-        <p class="control">
-          <button class="button" @click="gotoSignup">SINGUP</button>
-        </p>
-      </div>
-    </div>
-  </div>
+        <el-form-item>
+          <el-button type="primary" @click="login">LOGIN</el-button>
+          <el-button @click="gotoSignup">SIGNUP</el-button>
+        </el-form-item>
+      </el-form>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -46,9 +42,18 @@ export default {
       this.$http.post('api/users/login', body)
         .then((res) => {
           this.$store.commit('setAuthorized', res.body)
+          this.$router.push('/home')
+          this.$notify({
+            type: 'success',
+            title: `Welcome, ${res.body.username}`
+          })
         })
         .catch((res) => {
           this.$store.commit('setAuthorized', false)
+          this.$notify({
+            type: 'error',
+            title: 'email/password not match!'
+          })
         })
     },
 
@@ -58,3 +63,6 @@ export default {
   }
 }
 </script>
+
+<style>
+</style>
