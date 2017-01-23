@@ -30,11 +30,19 @@ export default {
   data () {
     return {
       username: '',
-      email: '',
       password: ''
     }
   },
-
+  computed: {
+    email: {
+      get: function () {
+        return localStorage.getItem('user.email')
+      },
+      set: function (value) {
+        localStorage.setItem('user.email', value)
+      }
+    }
+  },
   methods: {
     async signup () {
       let user = new User(this.email, this.password)
