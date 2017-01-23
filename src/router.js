@@ -24,6 +24,10 @@ const routes = [
     meta: {
       requireAuth: true
     }
+  },
+  {
+    path: '*',
+    redirect: '/dashboard'
   }
 ]
 
