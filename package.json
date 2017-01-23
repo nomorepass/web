@@ -12,6 +12,7 @@
     "coverage": "nyc mocha && cat ./coverage/lcov.info | coveralls"
   },
   "dependencies": {
+    "babel-runtime": "^6.22.0",
     "element-ui": "^1.1.5",
     "node-forge": "^0.6.47",
     "vue": "^2.1.0",
