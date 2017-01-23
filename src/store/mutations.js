@@ -1,6 +1,8 @@
 export default {
-  setAuthorized (state, user) {
-    state.authorized = !!user
-    state.user = user
+  setAuthorized (state, authorized) {
+    state.authorized = !!authorized
+  },
+  setKey (state, key) {
+    state.key = key
   }
 }

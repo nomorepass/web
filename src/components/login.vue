@@ -24,25 +24,35 @@ import User from '../models/user'
 export default {
   data () {
     return {
-      email: '',
       password: ''
     }
   },
-
+  computed: {
+    email: {
+      get: function () {
+        return localStorage.getItem('user.email')
+      },
+      set: function (value) {
+        localStorage.setItem('user.email', value)
+      }
+    }
+  },
   methods: {
     async login () {
       let user = new User(this.email, this.password)
       let key = await user.key()
+      let hash = await user.hash()
 
       let body = {
         email: this.email,
-        password: key
+        password: hash
       }
 
       this.$http.post('api/users/login', body)
         .then((res) => {
-          this.$store.commit('setAuthorized', res.body)
-          this.$router.push('/home')
+          this.$store.commit('setAuthorized', true)
+          this.$store.commit('setKey', key)
+          this.$router.push('dashboard')
           this.$notify({
             type: 'success',
             title: `Welcome, ${res.body.username}`

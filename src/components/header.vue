@@ -1,27 +1,25 @@
 <template>
   <nav>
-    <el-menu mode="horizontal" theme="light" @select="handleSelect" v-if="authorized">
+    <el-menu mode="horizontal" theme="light" @select="handleSelect">
       <el-menu-item index="home">
-        <router-link to="/">HOME</router-link>
+        HOME
       </el-menu-item>
 
-      <el-menu-item index="logout">
-        LOGOUT
-      </el-menu-item>
-    </el-menu>
+      <div v-if="authorized" class="menu">
+        <el-menu-item index="logout">
+          LOGOUT
+        </el-menu-item>
+      </div>
 
-    <el-menu mode="horizontal" theme="light" @select="handleSelect" v-else>
-      <el-menu-item index="0">
-        <router-link to="/">HOME</router-link>
-      </el-menu-item>
+      <div v-else class="menu">
+        <el-menu-item index="signup">
+          SIGNUP
+        </el-menu-item>
 
-      <el-menu-item index="signup">
-        SIGNUP
-      </el-menu-item>
-
-      <el-menu-item index="login">
-        LOGIN
-      </el-menu-item>
+        <el-menu-item index="login">
+          LOGIN
+        </el-menu-item>
+      </div>
     </el-menu>
   </nav>
 </template>
@@ -60,15 +58,24 @@ export default {
       switch (key) {
         case 'signup':
           this.$router.push('signup')
-          break;
+          break
         case 'login':
           this.$router.push('login')
-          break;
+          break
         case 'logout':
           this.logout()
-          break;
+          break
+        case 'home':
+          this.$router.push('home')
+          break
       }
     }
   }
 }
 </script>
+
+<style>
+.menu {
+  float: right
+}
+</style>

@@ -59,6 +59,10 @@ class Vault {
     return result
   }
 
+  get id () {
+    return this.data.id
+  }
+
   get username () {
     return this.data.username
   }

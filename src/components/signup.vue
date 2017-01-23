@@ -39,10 +39,10 @@ export default {
     async signup () {
       let user = new User(this.email, this.password)
 
-      user.key().then((key) => {
+      user.hash().then((hash) => {
         let body = {
           username: this.username,
-          password: key,
+          password: hash,
           email: this.email
         }
 

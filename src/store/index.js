@@ -9,10 +9,7 @@ const store = new Vuex.Store({
   state: {
     // indicate user login
     authorized: false,
-    user: null,
-
-    // all current user vaults
-    vaults: []
+    key: ''
   },
   mutations
 })
