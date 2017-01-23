@@ -1,7 +1,30 @@
 <template>
   <div>
-    <el-button type="primary" icon="plus" @click="addVault"></el-button>
-    <el-button type="primary" @click="loadAllVaults">Refresh</el-button>
+    <el-row>
+      <el-col :span="16" :offset="4" :xs="{span:20, offset:2}" :sm="{span:16, offset:4}" :md="{span:18, offset:3}" :lg="{span:16, offset:4}">
+        <el-button type="primary" icon="plus" @click="addVault"></el-button>
+        <el-button type="primary" @click="loadAllVaults">Refresh</el-button>
+        <el-table v-loading.body="loading" :data="vaults" height="250" border style="width: 100%">
+          <el-table-column prop="name" label="Name" width="180">
+          </el-table-column>
+          <el-table-column prop="url" label="Url" width="180">
+          </el-table-column>
+          <el-table-column prop="note" label="Note" width="180">
+          </el-table-column>
+          <el-table-column prop="username" label="Username" width="180">
+          </el-table-column>
+          <el-table-column prop="password" label="Password">
+          </el-table-column>
+          <el-table-column label="CRUD">
+            <template scope="scope">
+              <el-button icon="edit" @click="handleEdit(scope.row, 'edit')"></el-button>
+              <el-button icon="delete" @click="handleEdit(scope.row, 'delete')"></el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-col>
+    </el-row>
+
     <el-dialog :title="currentVault.name" v-model="dialogEditVaultVisible">
       <el-form>
         <el-form-item label="Name">
@@ -25,25 +48,6 @@
         <el-button type="primary" @click="updateOrInsertVault">确 定</el-button>
       </div>
     </el-dialog>
-
-    <el-table v-loading.body="loading" :data="vaults" height="250" border style="width: 100%">
-      <el-table-column prop="name" label="Name" width="180">
-      </el-table-column>
-      <el-table-column prop="url" label="Url" width="180">
-      </el-table-column>
-      <el-table-column prop="note" label="Note" width="180">
-      </el-table-column>
-      <el-table-column prop="username" label="Username" width="180">
-      </el-table-column>
-      <el-table-column prop="password" label="Password">
-      </el-table-column>
-      <el-table-column label="CRUD">
-        <template scope="scope">
-          <el-button icon="edit" @click="handleEdit(scope.row, 'edit')"></el-button>
-          <el-button icon="delete" @click="handleEdit(scope.row, 'delete')"></el-button>
-        </template>
-      </el-table-column>
-    </el-table>
   </div>
 </template>
 
