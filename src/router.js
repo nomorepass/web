@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import LoginView from './components/login'
 import SignupView from './components/signup'
 import DashboardView from './components/dashboard'
+import VaultView from './components/vault'
 
 import store from './store'
 
@@ -21,6 +22,13 @@ const routes = [
   {
     path: '/dashboard',
     component: DashboardView,
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: '/vaults/:id',
+    component: VaultView,
     meta: {
       requireAuth: true
     }

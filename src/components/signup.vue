@@ -25,6 +25,7 @@
 
 <script>
 import User from '../models/user'
+import UserAPI from '../apis/user'
 
 export default {
   data () {
@@ -54,19 +55,7 @@ export default {
           email: this.email
         }
 
-        return this.$http.post('api/users/signup', body)
-          .then((res) => {
-            this.$notify({
-              type: 'success',
-              title: `Welcome, ${res.body.username}`
-            })
-          })
-          .catch((res) => {
-            this.$notify({
-              type: 'error',
-              title: `Sorry, signup failed`
-            })
-          })
+        return UserAPI.signup(body)
       })
     },
 

@@ -20,6 +20,7 @@
 
 <script>
 import User from '../models/user'
+import UserAPI from '../apis/user'
 
 export default {
   data () {
@@ -48,23 +49,7 @@ export default {
         password: hash
       }
 
-      this.$http.post('api/users/login', body)
-        .then((res) => {
-          this.$store.commit('setAuthorized', true)
-          this.$store.commit('setKey', key)
-          this.$router.push('dashboard')
-          this.$notify({
-            type: 'success',
-            title: `Welcome, ${res.body.username}`
-          })
-        })
-        .catch((res) => {
-          this.$store.commit('setAuthorized', false)
-          this.$notify({
-            type: 'error',
-            title: 'email/password not match!'
-          })
-        })
+      return UserAPI.login(body, key)
     },
 
     gotoSignup () {
